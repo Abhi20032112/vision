@@ -4,7 +4,7 @@ import Layout from '@/components/Layout';
 import HomePage from '@/pages/HomePage';
 import AboutPage from '@/pages/AboutPage';
 import ServicesPage from '@/pages/ServicesPage';
-import TeamPage from '@/pages/TeamPage';
+import GalleryPage from '@/pages/GalleryPage';
 import ClientsPage from '@/pages/ClientsPage';
 import CertificationsPage from '@/pages/CertificationsPage';
 import ContactPage from '@/pages/ContactPage';
@@ -22,7 +22,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/services" element={<ServicesPage />} />
-            <Route path="/team" element={<TeamPage />} />
+            <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/clients" element={<ClientsPage />} />
             <Route path="/certifications" element={<CertificationsPage />} />
             <Route path="/contact" element={<ContactPage />} />

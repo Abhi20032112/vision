@@ -1,59 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from '@/ui/button';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-// Custom wave divider component
-const WaveDivider = () => (
-  <motion.div
-    className="absolute bottom-0 left-0 w-full overflow-hidden"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ delay: 1, duration: 1 }}
-  >
-    <svg
-      className="w-full h-12"
-      viewBox="0 0 1440 54"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M0 27L48 22.3C96 18 192 8 288 13.3C384 18 480 38 576 40.3C672 43 768 27 864 24.7C960 22 1056 32 1152 37.3C1248 43 1344 43 1392 43.3L1440 43V54H0V27Z"
-        fill="#00CC66"
-        fillOpacity="0.1"
-      />
-    </svg>
-  </motion.div>
-);
-
+// Hero images for the slider
 const heroImages = [
-  {
-    src: '/brown-elegant-spring-moodboard.png',
-    alt: 'Professional security and facility management services',
-    title: 'Advanced Security Solutions',
-    subtitle: 'Protecting what matters most with cutting-edge technology and expertise.'
-  },
-  {
-    src: '/travel-photo-collage.png',
-    alt: 'Team performing facility maintenance and housekeeping',
-    title: 'Comprehensive Facility Management',
-    subtitle: 'Expert housekeeping, maintenance & operational support services.'
-  },
-  {
-    src: '/whatsapp-image-2025.jpg',
-    alt: 'CCTV surveillance and control room environment',
-    title: 'State-of-the-Art Surveillance',
-    subtitle: 'Advanced CCTV systems & 24/7 monitoring for complete security coverage.'
-  }
+  '/brown-elegant-spring-moodboard.png',
+  '/travel-photo-collage.png',
+  '/whatsapp-image-2025.jpg'
 ];
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const sliderRef = useRef(null);
   const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], [0, -200]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
+  // Scroll transforms for parallax effect
+  const y = useTransform(scrollYProgress, [0, 1], [0, -300]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.3], [1, 0.95]);
+
+  // Smooth mouse tracking for parallax
+  const smoothMouseX = useSpring(mouseX, { stiffness: 300, damping: 30 });
+  const smoothMouseY = useSpring(mouseY, { stiffness: 300, damping: 30 });
+
+  // Slider navigation functions
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % heroImages.length);
   };
@@ -62,226 +36,253 @@ const HeroSection = () => {
     setCurrentSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length);
   };
 
+  // Auto-play slider every 5 seconds
   useEffect(() => {
     const interval = setInterval(nextSlide, 5000);
     return () => clearInterval(interval);
   }, []);
 
+  // Mouse tracking for parallax
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      mouseX.set(e.clientX / window.innerWidth);
+      mouseY.set(e.clientY / window.innerHeight);
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [mouseX, mouseY]);
+
+  // Loading animation
+  useEffect(() => {
+    setTimeout(() => setIsLoaded(true), 500);
+  }, []);
+
+  // Swipe gesture handling for mobile
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
+  const handleTouchStart = (e) => {
+    setTouchEnd(0);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+    if (isLeftSwipe) nextSlide();
+    if (isRightSwipe) prevSlide();
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black">
-      {/* Animated Gradient Background */}
+    <section className="relative h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      {/* Animated Background with Moving Gradient Orbs and Particles */}
       <motion.div
         className="absolute inset-0"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.3 }}
-        transition={{ duration: 1 }}
+        style={{
+          x: useTransform(smoothMouseX, [0, 1], [-20, 20]),
+          y: useTransform(smoothMouseY, [0, 1], [-20, 20]),
+        }}
       >
+        {/* Moving gradient orbs for depth */}
         <motion.div
-          className="absolute inset-0"
+          className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-r from-[#00cc88]/20 to-[#0077ff]/20 rounded-full blur-3xl"
           animate={{
-            background: [
-              "radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.4) 0%, transparent 50%)",
-              "radial-gradient(circle at 80% 50%, rgba(16, 185, 129, 0.4) 0%, transparent 50%)",
-              "radial-gradient(circle at 50% 20%, rgba(16, 185, 129, 0.4) 0%, transparent 50%)",
-              "radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.4) 0%, transparent 50%)",
-              "radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.4) 0%, transparent 50%)"
-            ]
+            scale: [1, 1.2, 1],
+            x: [0, 50, 0],
+            y: [0, -30, 0],
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-32 right-16 w-48 h-48 bg-gradient-to-r from-[#0077ff]/20 to-[#00cc88]/20 rounded-full blur-3xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            x: [0, -40, 0],
+            y: [0, 40, 0],
+            opacity: [0.4, 0.7, 0.4],
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute top-1/2 left-1/4 w-32 h-32 bg-gradient-to-r from-[#00cc88]/30 to-[#0077ff]/30 rounded-full blur-2xl"
+          animate={{
+            scale: [0.8, 1.3, 0.8],
+            rotate: [0, 180, 360],
+            opacity: [0.5, 0.8, 0.5],
           }}
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
         />
+
+        {/* Additional floating light effects */}
+        <motion.div
+          className="absolute top-1/4 right-1/4 w-24 h-24 bg-gradient-to-r from-white/10 to-[#0077ff]/10 rounded-full blur-xl"
+          animate={{
+            scale: [1, 1.5, 1],
+            opacity: [0.2, 0.5, 0.2],
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 left-1/3 w-40 h-40 bg-gradient-to-r from-[#00cc88]/10 to-white/10 rounded-full blur-xl"
+          animate={{
+            scale: [1.1, 0.9, 1.1],
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* Floating particles for depth */}
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-white/20 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -20, 0],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: Math.random() * 3 + 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
       </motion.div>
 
-      {/* 16:9 Aspect Ratio Box Container */}
+      {/* Main Content Container */}
       <motion.div
-        className="relative z-10 w-[80%] md:w-[85%] lg:w-[90%] aspect-video rounded-2xl shadow-2xl overflow-hidden bg-gradient-to-br from-black/20 to-gray-900/20 backdrop-blur-sm border border-white/10"
-        initial={{ opacity: 0, scale: 0.8, y: 50 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
+        className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        style={{ y, opacity, scale }}
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 0.9 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
       >
-        {/* Image Slider */}
-        <div className="relative w-full h-full">
+        {/* Modern Image Slider with Glass Effect */}
+        <div
+          ref={sliderRef}
+          className="relative w-full h-[60vh] md:h-[70vh] rounded-3xl overflow-hidden shadow-2xl backdrop-blur-xl bg-white/5 border border-white/10"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          style={{
+            boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
+          }}
+        >
           {heroImages.map((image, index) => (
             <motion.div
               key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                index === currentSlide ? 'opacity-100' : 'opacity-0'
-              }`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: index === currentSlide ? 1 : 0 }}
-              transition={{ duration: 1 }}
+              className="absolute inset-0"
+              initial={{ x: 0 }}
+              animate={{
+                x: index === currentSlide ? 0 : index < currentSlide ? '-100%' : '100%',
+                opacity: index === currentSlide ? 1 : 0
+              }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
             >
               <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full h-full object-contain"
+                src={image}
+                alt={`Hero image ${index + 1}`}
+                className="w-full h-full object-cover"
                 loading="lazy"
+                onLoad={() => setIsLoaded(true)}
               />
+              {/* Dark gradient overlay for text visibility */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
             </motion.div>
           ))}
 
-          {/* Dark overlay for text readability */}
-          <div className="absolute inset-0 bg-black/50" />
-
           {/* Navigation Arrows */}
-          <button
+          <motion.button
             onClick={prevSlide}
-            className="absolute left-6 top-1/2 z-20 transform -translate-y-1/2 bg-white/10 backdrop-blur-md text-white p-3 rounded-full hover:bg-white/20 transition-all duration-300 hover:scale-110"
+            className="absolute left-4 md:left-6 top-1/2 z-20 -translate-y-1/2 bg-white/10 backdrop-blur-md text-white p-3 md:p-4 rounded-full hover:bg-white/20 transition-all duration-300 hover:scale-110 shadow-lg border border-white/10"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Previous slide"
           >
             <ChevronLeft size={24} />
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={nextSlide}
-            className="absolute right-6 top-1/2 z-20 transform -translate-y-1/2 bg-white/10 backdrop-blur-md text-white p-3 rounded-full hover:bg-white/20 transition-all duration-300 hover:scale-110"
+            className="absolute right-4 md:right-6 top-1/2 z-20 -translate-y-1/2 bg-white/10 backdrop-blur-md text-white p-3 md:p-4 rounded-full hover:bg-white/20 transition-all duration-300 hover:scale-110 shadow-lg border border-white/10"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Next slide"
           >
             <ChevronRight size={24} />
-          </button>
+          </motion.button>
 
-          {/* Main Content */}
+          {/* Main Content Overlay */}
           <motion.div
-            className="absolute inset-0 flex items-center justify-center px-8"
-            style={{ y, opacity }}
+            className="absolute inset-0 flex items-center justify-center p-6 md:p-12"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
           >
             <div className="max-w-4xl mx-auto text-center">
-              {/* Heading */}
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 }
+              {/* Animated Headline */}
+              <motion.h1
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 md:mb-6 text-white leading-tight tracking-tight"
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+                style={{
+                  textShadow: "0 0 40px rgba(0,0,0,0.8), 0 0 20px rgba(255,255,255,0.3), 0 0 10px rgba(0,204,136,0.3)"
                 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                key={`heading-${currentSlide}`}
               >
-                <motion.h1
-                  className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-white leading-tight tracking-tight"
-                  style={{
-                    textShadow: "0 0 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 204, 102, 0.3)"
-                  }}
-                >
-                  {heroImages[currentSlide].title}
-                </motion.h1>
-              </motion.div>
+                Comprehensive Facility Management
+              </motion.h1>
 
-              {/* Tagline */}
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 }
+              {/* Animated Subtext */}
+              <motion.p
+                className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/90 mb-8 md:mb-12 font-light max-w-3xl mx-auto leading-relaxed"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.6, ease: "easeOut" }}
+                style={{
+                  textShadow: "0 0 20px rgba(0,0,0,0.6)"
                 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                key={`subtitle-${currentSlide}`}
               >
-                <motion.p
-                  className="text-lg md:text-xl text-white/90 mb-8 font-light max-w-3xl mx-auto leading-relaxed"
-                  style={{
-                    textShadow: "0 0 20px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 255, 255, 0.3)"
-                  }}
-                >
-                  {heroImages[currentSlide].subtitle}
-                </motion.p>
-              </motion.div>
+                Expert housekeeping, maintenance & operational support services.
+              </motion.p>
 
-              {/* CTA Button */}
+              {/* Animated CTA Button */}
               <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 }
-                }}
-                transition={{ duration: 0.6, delay: 0.9 }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.9, ease: "easeOut" }}
               >
-                <Link to="/services">
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
+                <Link to="/gallery">
+                  <motion.button
+                    className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#00cc88] to-[#0077ff] text-white font-bold text-lg rounded-full shadow-2xl hover:shadow-[0_0_30px_rgba(0,204,136,0.5)] transition-all duration-300 transform hover:scale-105"
+                    whileHover={{
+                      scale: 1.05,
+                      boxShadow: "0 0 30px rgba(0,204,136,0.5), 0 0 60px rgba(0,119,255,0.3)"
+                    }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Button
-                      size="lg"
-                      className="relative overflow-hidden bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white px-12 py-6 text-lg font-semibold rounded-full shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 transition-all duration-500 group"
+                    View Our Work →
+                    <motion.div
+                      className="ml-2"
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                     >
-                      <motion.span
-                        className="absolute inset-0 bg-gradient-to-r from-[#C0C0C0]/20 to-transparent"
-                        animate={{
-                          x: ["100%", "-100%"]
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "linear"
-                        }}
-                      />
-                      <span className="relative flex items-center justify-center">
-                        Explore Our Services
-                        <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform duration-300" />
-                      </span>
-                    </Button>
-                  </motion.div>
+                      <ChevronRight size={20} />
+                    </motion.div>
+                  </motion.button>
                 </Link>
               </motion.div>
             </div>
           </motion.div>
-
-          {/* Slide Indicators */}
-          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 flex space-x-3">
-            {heroImages.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentSlide ? 'bg-cyan-400 scale-125' : 'bg-white/50 hover:bg-white/75'
-                }`}
-              />
-            ))}
-          </div>
         </div>
-      </motion.div>
-
-      {/* Wave Divider */}
-      <WaveDivider />
-
-      {/* Scroll Down Animation Icon */}
-      <motion.div
-        className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2, duration: 1 }}
-      >
-        <motion.div
-          className="w-8 h-14 border-2 border-white/40 rounded-full flex justify-center items-start p-2 backdrop-blur-sm bg-white/5"
-          whileHover={{ borderColor: "#00CC66", scale: 1.1 }}
-          transition={{ duration: 0.3 }}
-        >
-          <motion.div
-            className="w-1.5 h-3 bg-[#00CC66] rounded-full"
-            animate={{
-              y: [0, 18, 0],
-              opacity: [1, 0.5, 1]
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-        </motion.div>
-        <motion.p
-          className="text-white/60 text-sm mt-3 font-light tracking-wider uppercase text-center"
-          animate={{
-            opacity: [0.6, 1, 0.6],
-            y: [0, -2, 0]
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        >
-          Scroll Down
-        </motion.p>
       </motion.div>
     </section>
   );

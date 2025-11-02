@@ -22,7 +22,7 @@ const Navbar = () => {
     { name: 'Home', href: '/', icon: Home },
     { name: 'About Us', href: '/about', icon: Info },
     { name: 'Services', href: '/services', icon: Briefcase },
-    { name: 'Our Team', href: '/team', icon: Users },
+    { name: 'Gallery', href: '/gallery', icon: Users },
     { name: 'Clients', href: '/clients', icon: Handshake },
     { name: 'Certifications', href: '/certifications', icon: Award },
     { name: 'Contact Us', href: '/contact', icon: Phone }
@@ -43,10 +43,21 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-20">
           <Link to="/" className="flex items-center space-x-3 group">
             <motion.div
-              whileHover={{ rotate: [0, -10, 10, 0] }}
+              whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
               transition={{ duration: 0.5 }}
+              className="relative"
             >
-              <Shield className="w-10 h-10 text-primary-600" />
+              <img
+                src="/logo.jpeg"
+                alt="Vision Technocrates Logo"
+                className="w-10 h-10 rounded-full object-cover border-2 border-primary-600 shadow-lg"
+              />
+              <motion.div
+                className="absolute inset-0 rounded-full border-2 border-primary-600"
+                initial={{ scale: 1, opacity: 0 }}
+                whileHover={{ scale: 1.2, opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              />
             </motion.div>
             <div>
               <span className="text-xl font-bold text-gradient">
