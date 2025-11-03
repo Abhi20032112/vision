@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Shield, Home, Info, Briefcase, Users, HeartHandshake as Handshake, Award, Phone } from 'lucide-react';
 import { Button } from '@/ui/button';
 import { Link, useLocation } from 'react-router-dom';
+import logo from '../../logo.jpeg';
 
 const Navbar = () => {
   const location = useLocation();
@@ -48,9 +49,9 @@ const Navbar = () => {
               className="relative"
             >
               <img
-                src="/logo.jpeg"
+                src={logo}
                 alt="Vision Technocrates Logo"
-                className="w-10 h-10 rounded-full object-cover border-2 border-primary-600 shadow-lg"
+                className="w-16 h-16 rounded-full object-cover"
               />
               <motion.div
                 className="absolute inset-0 rounded-full border-2 border-primary-600"

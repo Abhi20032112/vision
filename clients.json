@@ -1,0 +1,13 @@
+{
+    "clients": [
+        {"name": "Nalanda Medical College", "location": "Patna", "service": "Security & Housekeeping", "logo": "/logos/nalanda-medical-college-patna-logo.jpg"},
+        {"name": "District Health Society", "location": "Kishanganj, Gopalganj, Kaimur", "service": "Comprehensive Facility Management", "logo": "/logos/District Health Society.png"},
+        {"name": "Kendriya Vidyalayas", "location": "Across Bihar", "service": "Security & Maintenance", "logo": "/logos/Kendriye Vidyalaya.jpg"},
+        {"name": "Power Grid Corporation", "location": "Multiple Locations", "service": "Security & Safety Services", "logo": "/logos/Power grid corp of India.png"},
+        {"name": "Competition Commission of India", "location": "New Delhi", "service": "Corporate Security", "logo": "/logos/competion commision of India.png"},
+        {"name": "Bureau of Indian Standards", "location": "National", "service": "Facility Management", "logo": "/logos/Bureau of Indian Standards (BIS).png"},
+        {"name": "Central Board of Excise and Customs", "location": "National", "service": "Facility Management", "logo": "/logos/Central Board of Excise and Customs (CBEC).png"},
+        {"name": "District Institute of Education & Training", "location": "Bihar", "service": "Facility Management", "logo": "/logos/District Institute of Education & Training (DIET).png"},
+        {"name": "Sadar Hospital Kaimur", "location": "Kaimur", "service": "Facility Management", "logo": "/logos/Sadar Hospital Kaimur.png"}
+    ]
+}

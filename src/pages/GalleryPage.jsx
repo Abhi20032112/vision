@@ -8,28 +8,179 @@ const GalleryPage = () => {
 
   const galleryImages = [
     {
-      src: '/brown-elegant-spring-moodboard.png',
+      src: '/images/Brown Elegant Tender Aesthetic Spring Moodboard Photo Collage Desktop Wallpaper.png',
       alt: 'Professional security and facility management services',
-      title: 'Security Operations',
-      category: 'Security'
+      title: 'Security Operations'
     },
     {
-      src: '/travel-photo-collage.png',
+      src: '/images/WhatsApp Image 2025-10-09 at 10.46.28_841606aa.jpg',
       alt: 'Team performing facility maintenance and housekeeping',
-      title: 'Facility Maintenance',
-      category: 'Maintenance'
+      title: 'Facility Maintenance'
     },
     {
-      src: '/whatsapp-image-2025.jpg',
+      src: '/images/WhatsApp Image 2025-10-25 at 5.48.04 PM.jpeg',
       alt: 'CCTV surveillance and control room environment',
-      title: 'Surveillance Systems',
-      category: 'Technology'
+      title: 'Surveillance Systems'
     },
     {
-      src: '/logo.jpeg',
+      src: '/images/Brown Elegant Tender Aesthetic Spring Moodboard Photo Collage Desktop Wallpaper.png',
       alt: 'Vision Technocrates logo',
-      title: 'Company Branding',
-      category: 'Corporate'
+      title: 'Company Branding'
+    },
+    {
+      src: '/images/IMG-20251008-WA0004.jpg',
+      alt: 'Gallery Image 1',
+      title: 'Gallery Image 1'
+    },
+    {
+      src: '/images/IMG-20251008-WA0005.jpg',
+      alt: 'Gallery Image 2',
+      title: 'Gallery Image 2'
+    },
+    {
+      src: '/images/IMG-20251008-WA0006.jpg',
+      alt: 'Gallery Image 3',
+      title: 'Gallery Image 3'
+    },
+    {
+      src: '/images/IMG-20251008-WA0007.jpg',
+      alt: 'Gallery Image 4',
+      title: 'Gallery Image 4'
+    },
+    {
+      src: '/images/IMG-20251008-WA0008.jpg',
+      alt: 'Gallery Image 5',
+      title: 'Gallery Image 5'
+    },
+    {
+      src: '/images/IMG-20251008-WA0009.jpg',
+      alt: 'Gallery Image 6',
+      title: 'Gallery Image 6'
+    },
+    {
+      src: '/images/IMG-20251008-WA0010.jpg',
+      alt: 'Gallery Image 7',
+      title: 'Gallery Image 7'
+    },
+    {
+      src: '/images/IMG-20251008-WA0011.jpg',
+      alt: 'Gallery Image 8',
+      title: 'Gallery Image 8'
+    },
+    {
+      src: '/images/IMG-20251008-WA0012.jpg',
+      alt: 'Gallery Image 9',
+      title: 'Gallery Image 9'
+    },
+    {
+      src: '/images/IMG-20251010-WA0011.jpg',
+      alt: 'Gallery Image 10',
+      title: 'Gallery Image 10'
+    },
+    {
+      src: '/images/IMG-20251010-WA0012.jpg',
+      alt: 'Gallery Image 11',
+      title: 'Gallery Image 11'
+    },
+    {
+      src: '/images/IMG-20251010-WA0013.jpg',
+      alt: 'Gallery Image 12',
+      title: 'Gallery Image 12'
+    },
+    {
+      src: '/images/IMG-20251010-WA0014.jpg',
+      alt: 'Gallery Image 13',
+      title: 'Gallery Image 13'
+    },
+    {
+      src: '/images/IMG-20251011-WA0004.jpg',
+      alt: 'Gallery Image 14',
+      title: 'Gallery Image 14'
+    },
+    {
+      src: '/images/IMG-20251011-WA0009.jpg',
+      alt: 'Gallery Image 15',
+      title: 'Gallery Image 15'
+    },
+    {
+      src: '/images/IMG-20251011-WA0010.jpg',
+      alt: 'Gallery Image 16',
+      title: 'Gallery Image 16'
+    },
+    {
+      src: '/images/IMG-20251011-WA0011.jpg',
+      alt: 'Gallery Image 17',
+      title: 'Gallery Image 17'
+    },
+    {
+      src: '/images/IMG-20251011-WA0012.jpg',
+      alt: 'Gallery Image 18',
+      title: 'Gallery Image 18'
+    },
+    {
+      src: '/images/IMG-20251011-WA0013.jpg',
+      alt: 'Gallery Image 19',
+      title: 'Gallery Image 19'
+    },
+    {
+      src: '/images/IMG-20251011-WA0014.jpg',
+      alt: 'Gallery Image 20',
+      title: 'Gallery Image 20'
+    },
+    {
+      src: '/images/IMG-20251011-WA0015.jpg',
+      alt: 'Gallery Image 21',
+      title: 'Gallery Image 21'
+    },
+    {
+      src: '/images/IMG-20251011-WA0016.jpg',
+      alt: 'Gallery Image 22',
+      title: 'Gallery Image 22'
+    },
+    {
+      src: '/images/IMG-20251011-WA0017.jpg',
+      alt: 'Gallery Image 23',
+      title: 'Gallery Image 23'
+    },
+    {
+      src: '/images/WhatsApp Image 2025-10-09 at 10.46.28_b12ef0ca.jpg',
+      alt: 'Gallery Image 24',
+      title: 'Gallery Image 24'
+    },
+    {
+      src: '/images/WhatsApp Image 2025-10-09 at 10.46.29_696330f2.jpg',
+      alt: 'Gallery Image 25',
+      title: 'Gallery Image 25'
+    },
+    {
+      src: '/images/WhatsApp Image 2025-10-10 at 12.37.12_e7e3df06.jpg',
+      alt: 'Gallery Image 26',
+      title: 'Gallery Image 26'
+    },
+    {
+      src: '/images/WhatsApp Image 2025-10-10 at 16.11.55_1f76d46d.jpg',
+      alt: 'Gallery Image 27',
+      title: 'Gallery Image 27'
+    },
+    {
+      src: '/images/WhatsApp Image 2025-10-10 at 16.11.55_8b39979e.jpg',
+      alt: 'Gallery Image 28',
+      title: 'Gallery Image 28'
+    },
+    {
+      src: '/images/WhatsApp Image 2025-10-10 at 16.11.56_d4ab7831.jpg',
+      alt: 'Gallery Image 29',
+      title: 'Gallery Image 29'
+    },
+    {
+      src: '/images/WhatsApp Image 2025-10-10 at 20.15.36_71125b14.jpg',
+      alt: 'Gallery Image 30',
+      title: 'Gallery Image 30'
+    },
+    {
+      src: '/images/WhatsApp Image 2025-10-10 at 20.15.37_cda50982.jpg',
+      alt: 'Gallery Image 31',
+      title: 'Gallery Image 31'
     }
   ];
 
@@ -54,12 +205,7 @@ const GalleryPage = () => {
     setCurrentIndex(prevIndex);
   };
 
-  const categories = ['All', ...new Set(galleryImages.map(img => img.category))];
-  const [activeCategory, setActiveCategory] = useState('All');
 
-  const filteredImages = activeCategory === 'All'
-    ? galleryImages
-    : galleryImages.filter(img => img.category === activeCategory);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white py-20">
@@ -80,41 +226,22 @@ const GalleryPage = () => {
           </p>
         </motion.div>
 
-        {/* Category Filter */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4 mb-12"
-        >
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                activeCategory === category
-                  ? 'bg-blue-600 text-white shadow-lg'
-                  : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </motion.div>
+
 
         {/* Gallery Grid */}
         <motion.div
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
         >
-          {filteredImages.map((image, index) => (
+          {galleryImages.map((image, index) => (
             <motion.div
               key={image.src}
               layout
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
+              transition={{ duration: 0.6, delay: index * 0.05 }}
+              whileHover={{ scale: 1.05 }}
+              className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer"
               onClick={() => openModal(galleryImages.indexOf(image))}
             >
               <div className="aspect-video overflow-hidden">
@@ -124,12 +251,7 @@ const GalleryPage = () => {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-white font-semibold text-lg mb-1">{image.title}</h3>
-                  <p className="text-white/80 text-sm">{image.category}</p>
-                </div>
-              </div>
+
             </motion.div>
           ))}
         </motion.div>
@@ -178,12 +300,7 @@ const GalleryPage = () => {
                 <ChevronRight size={24} />
               </button>
 
-              {/* Image Info */}
-              <div className="absolute bottom-4 left-4 right-4 bg-black/50 backdrop-blur-sm rounded-lg p-4">
-                <h3 className="text-white font-semibold text-lg mb-1">{selectedImage.title}</h3>
-                <p className="text-white/80 text-sm">{selectedImage.category}</p>
-                <p className="text-white/60 text-sm mt-2">{selectedImage.alt}</p>
-              </div>
+
             </motion.div>
           </motion.div>
         )}

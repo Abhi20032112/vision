@@ -47,10 +47,10 @@ const AboutPage = () => {
                 className="absolute -inset-4 bg-gradient-to-r from-blue-200 to-cyan-200 rounded-2xl blur-2xl opacity-60 animate-pulse"
                 style={{ y: imageY }}
               />
-              <motion.img 
+              <motion.img
                 className="relative rounded-2xl shadow-2xl w-full"
-                alt="Team of security professionals in a meeting" 
-                src="https://images.unsplash.com/photo-1583279509717-73c5492d06cb" 
+                alt="Team of security professionals in a meeting"
+                src="/images/WhatsApp Image 2025-10-25 at 5.48.04 PM.jpeg"
                 style={{ y: imageY }}
               />
             </div>

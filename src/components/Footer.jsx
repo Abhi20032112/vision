@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Shield, Facebook, Linkedin, Instagram, Mail, Phone, MapPin, ChevronsRight, Send, ArrowUp, Users, Award, Clock } from 'lucide-react';
+import { Shield, Facebook, Linkedin, Instagram, Mail, Phone, MapPin, ChevronsRight, Send, ArrowUp } from 'lucide-react';
+import logo from '../../logo.jpeg';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
@@ -39,55 +40,7 @@ const Footer = () => {
       </div>
 
       <div className="container mx-auto px-4 py-16 relative z-10">
-        {/* Quick Stats Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
-        >
-          <div className="text-center">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-lg p-4 border border-blue-500/30"
-            >
-              <Users className="w-8 h-8 text-blue-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">500+</div>
-              <div className="text-sm text-slate-400">Happy Clients</div>
-            </motion.div>
-          </div>
-          <div className="text-center">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-lg p-4 border border-cyan-500/30"
-            >
-              <Award className="w-8 h-8 text-cyan-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">12+</div>
-              <div className="text-sm text-slate-400">Years Experience</div>
-            </motion.div>
-          </div>
-          <div className="text-center">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-lg p-4 border border-indigo-500/30"
-            >
-              <Shield className="w-8 h-8 text-indigo-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">24/7</div>
-              <div className="text-sm text-slate-400">Security Services</div>
-            </motion.div>
-          </div>
-          <div className="text-center">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-lg p-4 border border-purple-500/30"
-            >
-              <Clock className="w-8 h-8 text-purple-400 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-white">100%</div>
-              <div className="text-sm text-slate-400">Satisfaction Rate</div>
-            </motion.div>
-          </div>
-        </motion.div>
+
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Branding and Contact - Primary Column */}
@@ -105,9 +58,9 @@ const Footer = () => {
                 className="relative"
               >
                 <img
-                  src="/logo.jpeg"
+                  src={logo}
                   alt="Vision Technocrates Logo"
-                  className="w-12 h-12 rounded-full object-cover border-2 border-blue-400 shadow-lg"
+                  className="w-16 h-16 rounded-full object-cover"
                 />
                 <motion.div
                   className="absolute inset-0 rounded-full border-2 border-blue-400"

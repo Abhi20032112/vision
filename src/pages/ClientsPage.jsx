@@ -9,19 +9,22 @@ const ClientsPage = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   const clients = [
-    { icon: Building2, name: 'Nalanda Medical College', location: 'Patna', service: 'Security & Housekeeping' },
-    { icon: Building2, name: 'District Health Society', location: 'Kishanganj, Gopalganj, Kaimur', service: 'Comprehensive Facility Management' },
-    { icon: GraduationCap, name: 'Kendriya Vidyalayas', location: 'Across Bihar', service: 'Security & Maintenance' },
-    { icon: Zap, name: 'Power Grid Corporation', location: 'Multiple Locations', service: 'Security & Safety Services' },
-    { icon: Scale, name: 'Competition Commission of India', location: 'New Delhi', service: 'Corporate Security' },
-    { icon: AwardIcon, name: 'Bureau of Indian Standards', location: 'National', service: 'Facility Management' },
+    { icon: Building2, name: 'Nalanda Medical College', location: 'Patna', service: 'Security & Housekeeping', logo: '/logos/nalanda-medical-college-patna-logo.jpg' },
+    { icon: Building2, name: 'District Health Society', location: 'Kishanganj, Gopalganj, Kaimur', service: 'Comprehensive Facility Management', logo: '/logos/District Health Society.png' },
+    { icon: GraduationCap, name: 'Kendriya Vidyalayas', location: 'Across Bihar', service: 'Security & Maintenance', logo: '/logos/Kendriye Vidyalaya.jpg' },
+    { icon: Zap, name: 'Power Grid Corporation', location: 'Multiple Locations', service: 'Security & Safety Services', logo: '/logos/Power grid corp of India.png' },
+    { icon: Scale, name: 'Competition Commission of India', location: 'New Delhi', service: 'Corporate Security', logo: '/logos/competion commision of India.png' },
+    { icon: AwardIcon, name: 'Bureau of Indian Standards', location: 'National', service: 'Facility Management', logo: '/logos/Bureau of Indian Standards (BIS).png' },
+    { icon: Building2, name: 'Central Board of Excise and Customs', location: 'National', service: 'Facility Management', logo: '/logos/Central Board of Excise and Customs (CBEC).png' },
+    { icon: GraduationCap, name: 'District Institute of Education & Training', location: 'Bihar', service: 'Facility Management', logo: '/logos/District Institute of Education & Training (DIET).png' },
+    { icon: Building2, name: 'Sadar Hospital Kaimur', location: 'Kaimur', service: 'Facility Management', logo: '/logos/Sadar Hospital Kaimur.png' },
   ];
 
   return (
     <PageTransition>
       <Helmet>
         <title>Our Clients | Vision Technocrates Pvt. Ltd.</title>
-        <meta name="description" content="A showcase of our prestigious clients from government and private sectors who trust Vision Technocrates for their security and facility management needs." />
+        <meta name="description" content="A showcase of our clients from government and private sectors who trust Vision Technocrates for their security and facility management needs." />
       </Helmet>
 
       <section className="py-20 bg-slate-50" ref={ref}>
@@ -34,7 +37,7 @@ const ClientsPage = () => {
           >
             <Handshake className="w-16 h-16 mx-auto mb-6 text-blue-500" />
             <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-gradient">
-              Our Prestigious Clients
+              Our Clients
             </h1>
             <p className="text-lg text-slate-500 max-w-3xl mx-auto">
               Trusted by leading government and private organizations across India.
@@ -53,9 +56,17 @@ const ClientsPage = () => {
                 className="group"
               >
                 <div className="relative bg-white rounded-xl p-6 border border-slate-200 hover:border-blue-300 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 h-full">
-                  <div className="w-14 h-14 bg-gradient-to-br from-blue-50 to-blue-100 text-blue-500 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-sm">
-                    <client.icon className="w-7 h-7" />
-                  </div>
+                  {client.logo ? (
+                    <img
+                      src={client.logo}
+                      alt={`${client.name} logo`}
+                      className="w-14 h-14 object-contain mb-4 group-hover:scale-110 transition-transform duration-300 shadow-sm rounded-lg"
+                    />
+                  ) : (
+                    <div className="w-14 h-14 bg-gradient-to-br from-blue-50 to-blue-100 text-blue-500 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-sm">
+                      <client.icon className="w-7 h-7" />
+                    </div>
+                  )}
                   <h2 className="text-lg font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors">
                     {client.name}
                   </h2>

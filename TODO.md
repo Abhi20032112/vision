@@ -1,10 +1,5 @@
-# Footer Restructure TODO
+# TODO: Make Clients and Gallery Animations Continuously Sliding
 
-## Task: Restructure Footer Sections for Desktop
-
-### Steps to Complete:
-- [x] Edit Footer.jsx: Split the third column into Newsletter and Certifications & Back to Top to create four distinct columns
-- [x] Test layout on desktop to ensure proper alignment and spacing
-- [x] Check mobile responsiveness to confirm no regressions
-- [x] Run dev server to preview changes
-- [x] Final verification and cleanup
+- [x] Update Our Clients section autoplay delay from 3000ms to 0ms for continuous sliding
+- [x] Update Gallery section autoplay delay from 4000ms to 0ms for continuous sliding
+- [x] Test the continuous sliding animation on the homepage (Development server running on http://localhost:3006/)
