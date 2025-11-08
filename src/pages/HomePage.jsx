@@ -271,6 +271,7 @@ const HomePage = () => {
                   <img
                     src={slide.image}
                     alt={slide.tagline}
+                    loading="eager"
                     className="absolute inset-0 w-full h-full object-cover"
                     onError={(e) => {
                       // Fallback to placeholder if image not found
@@ -352,6 +353,7 @@ const HomePage = () => {
               <img
                 src="/images/MapChart_Map.png"
                 alt="Our Presence Map"
+                loading="lazy"
                 className="w-full h-auto rounded-lg shadow-lg"
               />
             </motion.div>
@@ -420,6 +422,7 @@ const HomePage = () => {
                       <img
                         src={client.logo}
                         alt={`${client.name} logo`}
+                        loading="lazy"
                         className="w-16 h-16 object-contain mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 rounded-lg"
                       />
                     ) : (
@@ -488,6 +491,7 @@ const HomePage = () => {
                       <img
                         src={image.src}
                         alt={image.alt}
+                        loading="lazy"
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         onError={(e) => {
                           // Fallback to placeholder if image not found
