@@ -12,7 +12,7 @@ const Footer = () => {
     { name: 'Home', href: '/' },
     { name: 'About Us', href: '/about' },
     { name: 'Services', href: '/services' },
-    { name: 'Our Team', href: '/team' },
+    // Removed 'Our Team' from footer quick links as requested
     { name: 'Clients', href: '/clients' },
     { name: 'Contact', href: '/contact' }
   ];
